@@ -3,14 +3,14 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node ./server.js"
+    "start": "node server.js"
   },
   "engines": {
     "node": "^12.18.3",
     "npm": "^6.0.0"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.14.0",
+    "@fortawesome/fontawesome-free": "^6.1.1",
     "bootstrap": "^4.5.2",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
@@ -26,12 +26,9 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tsiliopoulos/COMP229-F2020-Week3.git"
+    "url": "git+https://github.com/kayc529/comp229-assignment1.git"
   },
-  "author": "Tom Tsiliopoulos",
+  "author": "Kay Yan Cheung",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/tsiliopoulos/COMP229-F2020-Week3/issues"
-  },
-  "homepage": "https://github.com/tsiliopoulos/COMP229-F2020-Week3#readme"
+  "homepage": "https://github.com/kayc529/comp229-assignment1"
 }

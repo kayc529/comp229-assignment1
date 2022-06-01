@@ -1,14 +1,24 @@
 <%- include partials/header.ejs %>
-
 <%- include partials/main_nav.ejs %>
   
-
   <!-- Main Content -->
   <main class="container">
-    <div class="jumbotron">
-      <h1 class="display-4">Welcome to the <%= title %> page</h1>
-      
-    </div>
+    <% if(page =="home"){ %>
+      <%- include partials/home_page.ejs %>
+    <%}%>
+    <% if(page =="about"){ %>
+      <%- include partials/about_page.ejs %>
+    <%}%>
+    <% if(page =="projects"){ %>
+      <%- include partials/projects_page.ejs %>
+    <%}%>
+    <% if(page =="services"){ %>
+      <%- include partials/services_page.ejs %>
+    <%}%>
+    <% if(page =="contact"){ %>
+      <%- include partials/contact_page.ejs %>
+    <%}%>
+
   </main>
   
 <%- include partials/bottom_nav.ejs %>  
