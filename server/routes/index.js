@@ -1,34 +1,38 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function (req, res, next) {
-  res.render('index', { page: 'home' });
-});
+const {
+  displayHomePage,
+  displayAboutPage,
+  displayProjectsPage,
+  displayServicesPage,
+  displayContactPage,
+  displayLoginPage,
+  displayRegisterPage,
+} = require('../controllers/index');
 
 /* GET home page. */
-router.get('/home', function (req, res, next) {
-  res.render('index', { page: 'home' });
-});
+router.get('/', displayHomePage);
+
+/* GET home page. */
+router.get('/home', displayHomePage);
 
 /* GET About page. */
-router.get('/about', function (req, res, next) {
-  res.render('index', { page: 'about' });
-});
+router.get('/about', displayAboutPage);
 
 /* GET Projects page. */
-router.get('/projects', function (req, res, next) {
-  res.render('index', { page: 'projects' });
-});
+router.get('/projects', displayProjectsPage);
 
 /* GET Services page. */
-router.get('/services', function (req, res, next) {
-  res.render('index', { page: 'services' });
-});
+router.get('/services', displayServicesPage);
 
 /* GET Contact Us page. */
-router.get('/contact', function (req, res, next) {
-  res.render('index', { page: 'contact' });
-});
+router.get('/contact', displayContactPage);
+
+/* GET Login page. */
+router.get('/login', displayLoginPage);
+
+/* GET Login page. */
+router.get('/register', displayRegisterPage);
 
 module.exports = router;
