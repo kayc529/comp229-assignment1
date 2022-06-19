@@ -11,11 +11,13 @@ module.exports.displayBusinessContactPage = (req, res, next) => {
         contacts: contactList,
       });
     }
-  });
+  }).sort({ contactName: 'asc' });
 };
 
 module.exports.displayAddContactPage = (req, res, next) => {
-  res.render('pages/protected/add_contact_page');
+  res.render('pages/protected/add_contact_page', {
+    messages: req.flash('addContactMessage'),
+  });
 };
 
 module.exports.displayEditContactPage = (req, res, next) => {
@@ -24,12 +26,13 @@ module.exports.displayEditContactPage = (req, res, next) => {
 
   BusinessContact.findById(id, (err, contactToEdit) => {
     if (err) {
-      console.log(err);
+      console.log(err.msg);
       res.end(err);
     } else {
       //show the edit view
       res.render('pages/protected/edit_contact_page', {
         contact: contactToEdit,
+        messages: req.flash('addContactMessage'),
       });
     }
   });
@@ -44,10 +47,10 @@ module.exports.addNewContact = (req, res, next) => {
 
   BusinessContact.create(newContact, (err, Contact) => {
     if (err) {
-      console.log(err);
+      console.log(err.msg);
       res.end(err);
     } else {
-      // refresh the book list
+      // refresh the contact list
       res.redirect('/business');
     }
   });
@@ -55,9 +58,37 @@ module.exports.addNewContact = (req, res, next) => {
 
 module.exports.editContact = (req, res, next) => {
   //update existing contact
+  let id = req.params.id;
+
+  let updatedContact = BusinessContact({
+    _id: id,
+    contactName: req.body.contactName,
+    contactNumber: req.body.contactNumber,
+    email: req.body.email,
+  });
+
+  BusinessContact.updateOne({ _id: id }, updatedContact, (err) => {
+    if (err) {
+      console.log(err);
+      res.end(err);
+    } else {
+      // refresh the contact list
+      res.redirect('/business');
+    }
+  });
 };
 
 module.exports.deleteContact = (req, res, next) => {
   //delete existing contact
-  res.send('deleteContact');
+  let id = req.params.id;
+
+  BusinessContact.remove({ _id: id }, (err) => {
+    if (err) {
+      console.log(err);
+      res.end(err);
+    } else {
+      // refresh the book list
+      res.redirect('/business');
+    }
+  });
 };

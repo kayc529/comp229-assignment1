@@ -1,6 +1,7 @@
 const User = require('../models/User');
-let passport = require('passport');
-let jwt = require('jsonwebtoken');
+const passport = require('passport');
+const jwt = require('jsonwebtoken');
+const { addCookie, removeCookie } = require('../utils/cookie');
 
 module.exports.displayHomePage = (req, res) => {
   res.render('index', { page: 'home' });
@@ -25,7 +26,11 @@ module.exports.displayContactPage = (req, res) => {
 module.exports.displayLoginPage = (req, res) => {
   //check if user already logged in
   if (!req.user) {
-    res.render('pages/login_page', { page: 'login', title: 'login' });
+    res.render('pages/login_page', {
+      page: 'login',
+      title: 'login',
+      messages: req.flash('loginMessage'),
+    });
   } else {
     return res.redirect('/business');
   }
@@ -34,7 +39,11 @@ module.exports.displayLoginPage = (req, res) => {
 module.exports.displayRegisterPage = (req, res) => {
   //check if user already logged in
   if (!req.user) {
-    res.render('pages/register_page', { page: 'register', title: 'Register' });
+    res.render('pages/register_page', {
+      page: 'register',
+      title: 'Register',
+      messages: req.flash('registerMessage'),
+    });
   } else {
     return res.redirect('/business');
   }
@@ -68,8 +77,10 @@ module.exports.loginUser = (req, res, next) => {
         email: user.email,
       };
 
+      const oneWeek = 1000 * 60 * 60 * 24 * 7;
+
       const authToken = jwt.sign(payload, process.env.SECRET, {
-        expiresIn: 604800, // 1 week
+        expiresIn: oneWeek, // 1 week
       });
 
       /* TODO - Getting Ready to convert to API
@@ -82,7 +93,7 @@ module.exports.loginUser = (req, res, next) => {
             */
 
       //add username cookie
-      res.cookie('username', user?.username, { maxAge: 604800 });
+      addCookie(res, 'username', user?.username, oneWeek);
       return res.redirect('/business');
     });
   })(req, res, next);
@@ -97,15 +108,11 @@ module.exports.registerUser = (req, res, next) => {
 
   User.register(newUser, req.body.password, (err) => {
     if (err) {
-      console.log(err);
-      console.log('Error: Inserting New User');
-
       if (err.name == 'UserExistsError') {
         req.flash(
           'registerMessage',
           'Registration Error: User Already Exists!'
         );
-        console.log('Error: User Already Exists!');
       }
 
       return res.render('pages/register_page', {
@@ -119,7 +126,8 @@ module.exports.registerUser = (req, res, next) => {
       console.log('register success!');
       return passport.authenticate('local')(req, res, () => {
         //add username cookie
-        res.cookie('username', req.user?.username, { maxAge: 604800 });
+        const oneWeek = 1000 * 60 * 60 * 24 * 7;
+        addCookie(res, 'username', req.user?.username, oneWeek);
         res.redirect('/business');
       });
     }
@@ -133,7 +141,7 @@ module.exports.logoutUser = (req, res, next) => {
     }
 
     //remove username cookie
-    res.cookie('username', '', { maxAge: 0 });
+    removeCookie(res, 'username');
     res.redirect('/');
   });
 };

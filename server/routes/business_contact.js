@@ -12,15 +12,18 @@ const {
 //middleware
 const requireAuth = require('../middleware/requireAuth');
 
-router.get('/', displayBusinessContactPage);
+router.get('/', requireAuth, displayBusinessContactPage);
 
-router.route('/add-contact').get(displayAddContactPage).post(addNewContact);
+router
+  .route('/add-contact')
+  .get(requireAuth, displayAddContactPage)
+  .post(requireAuth, addNewContact);
 
 router
   .route('/edit-contact/:id')
-  .get(displayEditContactPage)
-  .patch(editContact);
+  .get(requireAuth, displayEditContactPage)
+  .post(requireAuth, editContact);
 
-router.get('delete-contact/:id', deleteContact);
+router.get('/delete-contact/:id', requireAuth, deleteContact);
 
 module.exports = router;
