@@ -136,13 +136,15 @@ module.exports.registerUser = (req, res, next) => {
 };
 
 module.exports.logoutUser = (req, res, next) => {
-  req.logout(function (err) {
-    if (err) {
-      return next(err);
-    }
+  // req.logout(function (err) {
+  //   if (err) {
+  //     return next(err);
+  //   }
 
-    //remove username cookie
-    removeCookie(res, 'username');
-    res.redirect('/');
-  });
+  //   //remove username cookie
+  //   removeCookie(res, 'username');
+  //   res.redirect('/');
+  // });
+  req.logout();
+  res.redirect('/');
 };

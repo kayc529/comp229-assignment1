@@ -21,13 +21,17 @@ let localStrategy = passportLocal.Strategy;
 let flash = require('connect-flash');
 
 //db connection
+let mongoose = require('mongoose');
 let db = require('./db');
-// mongoose.connect(db.DB_URI);
-// let mongoDB = mongoose.connection;
-// mongoDB.on('error', console.error.bind(console, 'Connection Error:'));
-// mongoDB.once('open', () => {
-//   console.log('Connected to MongoDB...');
-// });
+
+// point mongoose to the DB URI
+mongoose.connect(db.URI, { useNewUrlParser: true, useUnifiedTopology: true });
+
+let mongoDB = mongoose.connection;
+mongoDB.on('error', console.error.bind(console, 'Connection Error:'));
+mongoDB.once('open', () => {
+  console.log('Connected to MongoDB...');
+});
 
 //import routers
 let indexRouter = require('../routes/index');
