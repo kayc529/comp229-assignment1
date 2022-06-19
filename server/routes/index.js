@@ -21,24 +21,24 @@ router.get('/', displayHomePage);
 router.get('/home', displayHomePage);
 
 /* GET About page. */
-router.get('/about', displayAboutPage);
+// router.get('/about', displayAboutPage);
 
-/* GET Projects page. */
-router.get('/projects', displayProjectsPage);
+// /* GET Projects page. */
+// router.get('/projects', displayProjectsPage);
 
-/* GET Services page. */
-router.get('/services', displayServicesPage);
+// /* GET Services page. */
+// router.get('/services', displayServicesPage);
 
-/* GET Contact Us page. */
-router.get('/contact', displayContactPage);
+// /* GET Contact Us page. */
+// router.get('/contact', displayContactPage);
 
-/* GET & POST Login page. */
-router.route('/login').get(displayLoginPage).post(loginUser);
+// /* GET & POST Login page. */
+// router.route('/login').get(displayLoginPage).post(loginUser);
 
-/* GET & POST Register page. */
-router.route('/register').get(displayRegisterPage).post(registerUser);
+// /* GET & POST Register page. */
+// router.route('/register').get(displayRegisterPage).post(registerUser);
 
-/* GET Logout user */
-router.route('/logout').get(logoutUser);
+// /* GET Logout user */
+// router.route('/logout').get(logoutUser);
 
 module.exports = router;

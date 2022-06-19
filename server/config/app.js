@@ -35,7 +35,7 @@ mongoDB.once('open', () => {
 
 //import routers
 let indexRouter = require('../routes/index');
-let businessContactRouter = require('../routes/business_contact');
+// let businessContactRouter = require('../routes/business_contact');
 
 // view engine setup
 app.set('views', path.join(__dirname, '../views'));

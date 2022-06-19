@@ -145,6 +145,7 @@ module.exports.logoutUser = (req, res, next) => {
   //   removeCookie(res, 'username');
   //   res.redirect('/');
   // });
+  removeCookie(res, 'username');
   req.logout();
   res.redirect('/');
 };
