@@ -1,8 +1,6 @@
-let express = require('express');
-let app = express();
-
 // installed 3rd party packages
 let createError = require('http-errors');
+let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
@@ -20,12 +18,12 @@ let passportLocal = require('passport-local');
 let localStrategy = passportLocal.Strategy;
 let flash = require('connect-flash');
 
-//db connection
+// database setup
 let mongoose = require('mongoose');
-let db = require('./db');
+let DB = require('./db');
 
 // point mongoose to the DB URI
-mongoose.connect(db.URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(DB.URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 let mongoDB = mongoose.connection;
 mongoDB.on('error', console.error.bind(console, 'Connection Error:'));
@@ -33,15 +31,15 @@ mongoDB.once('open', () => {
   console.log('Connected to MongoDB...');
 });
 
-//import routers
 let indexRouter = require('../routes/index');
-// let businessContactRouter = require('../routes/business_contact');
+let businessRouter = require('../routes/business_contact');
+
+let app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'ejs'); // express  -e
 
-//middleware
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -52,7 +50,7 @@ app.use(express.static(path.join(__dirname, '../../node_modules')));
 //setup express session
 app.use(
   session({
-    secret: db.SECRET,
+    secret: 'SomeSecret',
     saveUninitialized: false,
     resave: false,
   })
@@ -64,6 +62,8 @@ app.use(flash());
 // initialize passport
 app.use(passport.initialize());
 app.use(passport.session());
+
+// passport user configuration
 
 // create a User Model Instance
 let User = require('../models/User');
@@ -77,7 +77,7 @@ passport.deserializeUser(User.deserializeUser());
 
 let jwtOptions = {};
 jwtOptions.jwtFromRequest = ExtractJWT.fromAuthHeaderAsBearerToken();
-jwtOptions.secretOrKey = db.SECRET;
+jwtOptions.secretOrKey = DB.Secret;
 
 let strategy = new JWTStrategy(jwtOptions, (jwt_payload, done) => {
   User.findById(jwt_payload.id)
@@ -91,9 +91,9 @@ let strategy = new JWTStrategy(jwtOptions, (jwt_payload, done) => {
 
 passport.use(strategy);
 
-//routing
+// routing
 app.use('/', indexRouter);
-app.use('/business', businessContactRouter);
+app.use('/business', businessRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

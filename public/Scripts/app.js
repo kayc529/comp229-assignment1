@@ -13,7 +13,7 @@
 
   let id = document.getElementById('submit-btn');
   let usernameDisplay = document.getElementById('username-display');
-  console.log('hi???');
+
   //submit contact form
   if (id) {
     id.onclick = function (e) {

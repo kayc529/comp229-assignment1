@@ -80,7 +80,7 @@ module.exports.loginUser = (req, res, next) => {
 
       const oneWeek = 1000 * 60 * 60 * 24 * 7;
 
-      const authToken = jwt.sign(payload, db.SECRET, {
+      const authToken = jwt.sign(payload, db.Secret, {
         expiresIn: oneWeek, // 1 week
       });
 
