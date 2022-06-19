@@ -1,7 +1,40 @@
 <%- include ../../partials/header.ejs %>
+<%- include ../../partials/protected_nav.ejs %>
+<main class="page-container">
+    <div class="container-center">
+        <h2 class="greetings-p">Welcome! <span id="username-display"></span></h2>
+        <br>
+        <a href="/business/add-contact" class="btn btn-secondary" role="button">
+            <i class="fas fa-plus-circle"></i>  Add new contact</a>
+            <br>
+            <br>
+        <table class="table table-bordered table-striped table-hover">
+            <tr class="d-flex">
+                <th class="text-center col-3">Contact Name</th>
+                <th class="text-center col-3">Contact Number</th>
+                <th class="text-center col-3">Email Address</th>
+                <th class="text-center col-3"></th>
 
-<main>
-    this is business contact page
+            </tr>
+   
+
+            <!-- Repeatable Template Row -->
+            <% for(let i = 0; i < contacts.length; i++) { %>
+                <tr class="d-flex">
+                        <td class="text-center col-3"><%= contacts[i].contactName %></td>
+                        <td class="text-center col-3"><%= contacts[i].contactNumber %></td>
+                        <td class="text-center col-3"><%= contacts[i].email %></td>    
+                        <td class="text-center col-3">
+                            <a href="/business/edit-contact/<%= contacts[i]._id %>" class="btn btn-primary btn-sm">
+                            <i class="fas fa-pencil-alt"></i> Edit</a>
+                            <a href="/business/delete-contact/<%= contacts[i]._id %>" class="btn btn-danger btn-sm">
+                                <i class="fas fa-trash-alt"></i> Delete</a>
+                        </td>
+                </tr>
+            <% } %>
+        </table>
+
+    </div>
 </main>
 
 <%- include ../../partials/bottom_nav.ejs %>  

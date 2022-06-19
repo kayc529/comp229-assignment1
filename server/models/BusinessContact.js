@@ -23,7 +23,7 @@ const BusinessContactSchema = new mongoose.Schema(
       maxlength: 50,
     },
   },
-  { collection: 'businessContacts' }
+  { collection: 'businessContacts', timestamps: true }
 );
 
-module.exports = mongoose.Model('BusinessContact', BusinessContactSchema);
+module.exports = mongoose.model('BusinessContact', BusinessContactSchema);

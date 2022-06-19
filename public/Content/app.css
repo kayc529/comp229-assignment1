@@ -38,6 +38,7 @@ body{
     width:80%;
     border-radius: 20px;
     box-shadow: 5px 5px 20px rgba(0,0,0,0.2);
+    margin-bottom: 100px;
 }
 
 .welcome-p {
@@ -160,4 +161,27 @@ textarea{
     display: flex;
     width:200px;
     justify-content: space-between;
+}
+
+.login-title {
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login-buttons-container {
+    display:flex;
+    justify-content: space-around;
+}
+
+.change-login-register-p {
+    margin-top: 32px;
+}
+
+.logout-btn {
+    justify-self: right;
+}
+
+.greetings-p {
+    text-transform: uppercase;
 }

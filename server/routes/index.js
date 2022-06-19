@@ -9,6 +9,9 @@ const {
   displayContactPage,
   displayLoginPage,
   displayRegisterPage,
+  loginUser,
+  registerUser,
+  logoutUser,
 } = require('../controllers/index');
 
 /* GET home page. */
@@ -29,10 +32,13 @@ router.get('/services', displayServicesPage);
 /* GET Contact Us page. */
 router.get('/contact', displayContactPage);
 
-/* GET Login page. */
-router.get('/login', displayLoginPage);
+/* GET & POST Login page. */
+router.route('/login').get(displayLoginPage).post(loginUser);
 
-/* GET Login page. */
-router.get('/register', displayRegisterPage);
+/* GET & POST Register page. */
+router.route('/register').get(displayRegisterPage).post(registerUser);
+
+/* GET Logout user */
+router.route('/logout').get(logoutUser);
 
 module.exports = router;

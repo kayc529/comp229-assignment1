@@ -4,6 +4,9 @@ const {
   displayBusinessContactPage,
   displayAddContactPage,
   displayEditContactPage,
+  addNewContact,
+  editContact,
+  deleteContact,
 } = require('../controllers/business_contacts');
 
 //middleware
@@ -11,8 +14,13 @@ const requireAuth = require('../middleware/requireAuth');
 
 router.get('/', displayBusinessContactPage);
 
-router.get('/add-contact', displayAddContactPage);
+router.route('/add-contact').get(displayAddContactPage).post(addNewContact);
 
-router.get('/edit-contact', displayEditContactPage);
+router
+  .route('/edit-contact/:id')
+  .get(displayEditContactPage)
+  .patch(editContact);
+
+router.get('delete-contact/:id', deleteContact);
 
 module.exports = router;

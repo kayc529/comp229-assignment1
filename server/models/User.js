@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const passportLocalMongoose = require('passport-local-mongoose');
+
 const UserSchema = new mongoose.Schema(
   {
     username: {
@@ -17,4 +19,8 @@ const UserSchema = new mongoose.Schema(
   { collection: 'users', timestamps: true }
 );
 
-module.exports = mongoose.Model('User', UserSchema);
+// configure options for User Model
+let options = { missingPasswordError: 'Wrong / Missing Password' };
+UserSchema.plugin(passportLocalMongoose, options);
+
+module.exports = mongoose.model('User', UserSchema);

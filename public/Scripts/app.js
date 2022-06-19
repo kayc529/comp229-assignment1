@@ -12,7 +12,8 @@
   window.addEventListener('load', Start);
 
   let id = document.getElementById('submit-btn');
-
+  let usernameDisplay = document.getElementById('username-display');
+  console.log('hi???');
   //submit contact form
   if (id) {
     id.onclick = function (e) {
@@ -29,5 +30,28 @@
       alert(`Thank you ${name}! Your form is submitted!`);
       window.location.href = '/';
     };
+  }
+
+  if (usernameDisplay) {
+    //get username from cookie
+    let username = getCookieValueWithName('username');
+    let nameToDisplay = username || '';
+    usernameDisplay.innerHTML = nameToDisplay;
+  }
+
+  function getCookieValueWithName(cookieName) {
+    let name = cookieName + '=';
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let decodedCookiesArr = decodedCookie.split(';');
+    for (let i = 0; i < decodedCookiesArr.length; i++) {
+      let c = decodedCookiesArr[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return '';
   }
 })();
