@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 let express = require('express');
 let app = express();
 
@@ -24,13 +22,12 @@ let flash = require('connect-flash');
 
 //db connection
 let db = require('./db');
-let mongoose = require('mongoose');
-mongoose.connect(db.DB_URI);
-let mongoDB = mongoose.connection;
-mongoDB.on('error', console.error.bind(console, 'Connection Error:'));
-mongoDB.once('open', () => {
-  console.log('Connected to MongoDB...');
-});
+// mongoose.connect(db.DB_URI);
+// let mongoDB = mongoose.connection;
+// mongoDB.on('error', console.error.bind(console, 'Connection Error:'));
+// mongoDB.once('open', () => {
+//   console.log('Connected to MongoDB...');
+// });
 
 //import routers
 let indexRouter = require('../routes/index');
