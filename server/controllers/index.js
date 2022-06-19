@@ -2,6 +2,7 @@ const User = require('../models/User');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const { addCookie, removeCookie } = require('../utils/cookie');
+const db = require('../config/db');
 
 module.exports.displayHomePage = (req, res) => {
   res.render('index', { page: 'home' });
@@ -79,7 +80,7 @@ module.exports.loginUser = (req, res, next) => {
 
       const oneWeek = 1000 * 60 * 60 * 24 * 7;
 
-      const authToken = jwt.sign(payload, process.env.SECRET, {
+      const authToken = jwt.sign(payload, db.SECRET, {
         expiresIn: oneWeek, // 1 week
       });
 

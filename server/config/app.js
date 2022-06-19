@@ -23,8 +23,9 @@ let localStrategy = passportLocal.Strategy;
 let flash = require('connect-flash');
 
 //db connection
+let db = require('./db');
 let mongoose = require('mongoose');
-mongoose.connect(process.env.DB_URI);
+mongoose.connect(db.DB_URI);
 let mongoDB = mongoose.connection;
 mongoDB.on('error', console.error.bind(console, 'Connection Error:'));
 mongoDB.once('open', () => {
@@ -50,7 +51,7 @@ app.use(express.static(path.join(__dirname, '../../node_modules')));
 //setup express session
 app.use(
   session({
-    secret: process.env.SECRET,
+    secret: db.SECRET,
     saveUninitialized: false,
     resave: false,
   })
@@ -75,7 +76,7 @@ passport.deserializeUser(User.deserializeUser());
 
 let jwtOptions = {};
 jwtOptions.jwtFromRequest = ExtractJWT.fromAuthHeaderAsBearerToken();
-jwtOptions.secretOrKey = process.env.SECRET;
+jwtOptions.secretOrKey = db.SECRET;
 
 let strategy = new JWTStrategy(jwtOptions, (jwt_payload, done) => {
   User.findById(jwt_payload.id)
