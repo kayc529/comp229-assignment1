@@ -1,3 +1,8 @@
+/* File name: app.js */
+/* Student's name: Kay Yan Cheung */
+/* StudentID: 301183574 */
+/* Date: Jun 21 2022 */
+
 // installed 3rd party packages
 let createError = require('http-errors');
 let express = require('express');

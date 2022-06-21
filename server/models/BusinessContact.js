@@ -1,3 +1,10 @@
+/* File name: BusinessConact.js */
+/* Student's name: Kay Yan Cheung */
+/* StudentID: 301183574 */
+/* Date: Jun 21 2022 */
+
+//MODEL FOR BUSINESS CONTACT
+
 const mongoose = require('mongoose');
 const BusinessContactSchema = new mongoose.Schema(
   {

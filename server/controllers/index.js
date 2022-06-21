@@ -1,29 +1,40 @@
+/* File name: index.js */
+/* Student's name: Kay Yan Cheung */
+/* StudentID: 301183574 */
+/* Date: Jun 21 2022 */
+
 const User = require('../models/User');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const { addCookie, removeCookie } = require('../utils/cookie');
 const db = require('../config/db');
 
+//GET to display the home page
 module.exports.displayHomePage = (req, res) => {
   res.render('index', { page: 'home' });
 };
 
+//GET to display the about page
 module.exports.displayAboutPage = (req, res) => {
   res.render('pages/about_page', { page: 'about' });
 };
 
+//GET to display the projects page
 module.exports.displayProjectsPage = (req, res) => {
   res.render('pages/projects_page', { page: 'projects' });
 };
 
+//GET to display the services page
 module.exports.displayServicesPage = (req, res) => {
   res.render('pages/services_page', { page: 'services' });
 };
 
+//GET to display the contact page
 module.exports.displayContactPage = (req, res) => {
   res.render('pages/contact_page', { page: 'contact' });
 };
 
+//GET to display the login page
 module.exports.displayLoginPage = (req, res) => {
   //check if user already logged in
   if (!req.user) {
@@ -37,6 +48,7 @@ module.exports.displayLoginPage = (req, res) => {
   }
 };
 
+//GET to display the register page
 module.exports.displayRegisterPage = (req, res) => {
   //check if user already logged in
   if (!req.user) {
@@ -50,6 +62,7 @@ module.exports.displayRegisterPage = (req, res) => {
   }
 };
 
+//POST to process the login credentials and authenticate user
 module.exports.loginUser = (req, res, next) => {
   //check if user exists in db
   passport.authenticate('local', (err, user, info) => {
@@ -100,6 +113,7 @@ module.exports.loginUser = (req, res, next) => {
   })(req, res, next);
 };
 
+//POST to process the register credentials and register and authenticate the user
 module.exports.registerUser = (req, res, next) => {
   //create new user
   const newUser = new User({
@@ -107,6 +121,7 @@ module.exports.registerUser = (req, res, next) => {
     email: req.body.email,
   });
 
+  //register user
   User.register(newUser, req.body.password, (err) => {
     if (err) {
       if (err.name == 'UserExistsError') {
@@ -136,16 +151,9 @@ module.exports.registerUser = (req, res, next) => {
   });
 };
 
+//GET logout the user
 module.exports.logoutUser = (req, res, next) => {
-  // req.logout(function (err) {
-  //   if (err) {
-  //     return next(err);
-  //   }
-
-  //   //remove username cookie
-  //   removeCookie(res, 'username');
-  //   res.redirect('/');
-  // });
+  //remove username cookie
   removeCookie(res, 'username');
   req.logout();
   res.redirect('/');

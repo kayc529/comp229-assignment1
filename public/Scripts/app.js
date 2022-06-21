@@ -1,7 +1,7 @@
 /* File name: app.js */
 /* Student's name: Kay Yan Cheung */
 /* StudentID: 301183574 */
-/* Date: Jun 3 2022 */
+/* Date: Jun 21 2022 */
 
 // IIFE -- Immediately Invoked Function Expression
 (function () {
@@ -32,13 +32,14 @@
     };
   }
 
+  //get username from cookie
   if (usernameDisplay) {
-    //get username from cookie
     let username = getCookieValueWithName('username');
     let nameToDisplay = username || '';
     usernameDisplay.innerHTML = nameToDisplay;
   }
 
+  //get the value of the cookie with cookie name
   function getCookieValueWithName(cookieName) {
     let name = cookieName + '=';
     let decodedCookie = decodeURIComponent(document.cookie);

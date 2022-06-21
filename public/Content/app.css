@@ -1,13 +1,14 @@
 /* File name: app.css */
 /* Student's name: Kay Yan Cheung */
 /* StudentID: 301183574 */
-/* Date: Jun 3 2022 */
+/* Date: Jun 21 2022 */
 
 /* custom css goes here */
 body{
     background-color: grey;
 }
 
+/* GLOBAL CSS STYLES */
 .logo-img {
     width:75px;
     height:75px;
@@ -55,6 +56,7 @@ body{
     align-items: center;
 }
 
+/* ABOUT PAGE */
 .about-container {
     display:grid;
     grid-template-columns: 1fr 3fr;
@@ -73,6 +75,7 @@ body{
     padding:0 20px;
 }
 
+/* PROJECTS PAGE */
 .projects-container {
     display:flex;
     flex-direction: column;
@@ -104,6 +107,7 @@ body{
     border-radius: 12px;
 }
 
+/* SERVICES PAGE */
 .services-container {
     display:grid;
     grid-template-columns: 1.5fr 1fr;
@@ -121,6 +125,7 @@ body{
     list-style:circle;
 }
 
+/* CONTACT PAGE */
 .contact-container {
     width:100%;
     display: grid;
@@ -163,6 +168,7 @@ textarea{
     justify-content: space-between;
 }
 
+/* LOGIN PAGE */
 .login-title {
     text-transform: uppercase;
     text-align: center;
@@ -178,6 +184,7 @@ textarea{
     margin-top: 32px;
 }
 
+/* BUSINESS PAGE */
 .logout-btn {
     justify-self: right;
 }

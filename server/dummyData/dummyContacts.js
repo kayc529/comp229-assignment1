@@ -1,3 +1,9 @@
+/* File name: dummyContacts.js */
+/* Student's name: Kay Yan Cheung */
+/* StudentID: 301183574 */
+/* Date: Jun 21 2022 */
+
+//dummy data for get business contacts list
 const dummyContacts = [
   {
     id: 1,
