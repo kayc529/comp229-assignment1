@@ -118,6 +118,7 @@ module.exports.registerUser = (req, res, next) => {
 
       return res.render('pages/register_page', {
         title: 'Register',
+        page: 'register',
         messages: req.flash('registerMessage'),
       });
     } else {

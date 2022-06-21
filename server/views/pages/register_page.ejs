@@ -3,6 +3,13 @@
 <section>
     <div class="page-container">
         <div class="container-center">
+               <!-- Message Area -->
+               <% if(messages.length > 0) {%>
+                <div class="alert alert-danger">
+                    <%= messages %>
+                </div>
+                <% } %>
+
             <form class="login-form" method="POST" autocomplete="off">
                 <h1 class="login-title"><%= title %></h1>
                 <div class="form-group">
